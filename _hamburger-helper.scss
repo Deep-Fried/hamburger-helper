@@ -1,0 +1,53 @@
+@mixin hamburger-helper(
+  $hamburger_color : #000
+  , $hamburger_thickness : 0.25em
+  , $hamburger_thickness_offset : 0.2em
+  , $hamburger_width : 1em
+  , $hamburger_side : right
+  , $hamburger_gutter : 1em
+  , $hamburger_top : false
+  , $hamburger_right : false
+  , $hamburger_left : false
+  )
+{
+  @if $hamburger_side == right
+  {
+    padding-right: ( $hamburger_width + $hamburger_gutter );
+  }
+
+  @else
+  {
+    padding-left: ( $hamburger_width + $hamburger_gutter );
+  }
+
+  position: relative;
+
+  &:after
+  {
+    content: "";
+    width: $hamburger_width;
+    height: $hamburger_thickness;
+    position: absolute;
+
+    @if $hamburger_top
+    {
+      top: $hamburger_top;
+    }
+
+    @if $hamburger_right
+    {
+      right: $hamburger_right;
+    }
+
+    @if $hamburger_left
+    {
+      left: $hamburger_left;
+    }
+
+    background: $hamburger_color;
+    @include box-shadow(
+      0 ( $hamburger_thickness + $hamburger_thickness_offset ) 0 0 $hamburger_color,
+      0 ( ( $hamburger_thickness * 2 ) + ( $hamburger_thickness_offset * 2 ) ) 0 0 $hamburger_color
+    );
+  }
+}
